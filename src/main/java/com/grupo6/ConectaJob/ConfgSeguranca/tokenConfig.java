@@ -24,6 +24,8 @@ public class tokenConfig {
             throw new RuntimeException("erro ao gerar token jwt", exception);}
     }
 
+
+
     private Instant dataExpiracao() {
         return LocalDateTime.now().plusHours(3).toInstant(ZoneOffset.of("-03:00"));
     }

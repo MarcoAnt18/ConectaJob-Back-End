@@ -26,15 +26,13 @@ public class MeuFiltroSeguranca extends OncePerRequestFilter {
 
         var tokenRecuperado = recuperandoToken(request);
         if (tokenRecuperado != null){
-            tokenConfig.verificaValidadeToken(tokenRecuperado);
-            var userTrabalhador = repositoryUserTrabalhador.findBycpf(tokenRecuperado);
+            var tokenValidado = tokenConfig.verificaValidadeToken(tokenRecuperado);
+            var userTrabalhador = repositoryUserTrabalhador.findByCpf(tokenValidado);
             var authentication = new UsernamePasswordAuthenticationToken(userTrabalhador,null,userTrabalhador.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
         filterChain.doFilter(request,response);
-
-
     }
 
     private String recuperandoToken (HttpServletRequest JSON){

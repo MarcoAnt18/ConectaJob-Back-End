@@ -23,7 +23,7 @@ public class FiltroConfig {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers(HttpMethod.GET, "/TEST").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/teste").permitAll()
                         .requestMatchers(HttpMethod.POST,"/login","login/funcionarioLogin","login/createFuncionarioUser").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated()

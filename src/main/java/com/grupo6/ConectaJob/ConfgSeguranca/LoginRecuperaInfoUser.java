@@ -12,7 +12,7 @@ public class LoginRecuperaInfoUser implements UserDetailsService {
     @Autowired
     private repositoryUserTrabalhador repositoryUserTrabalhador;
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return repositoryUserTrabalhador.findBycpf(username);
+    public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
+        return repositoryUserTrabalhador.findByCpf(cpf);
     }
 }

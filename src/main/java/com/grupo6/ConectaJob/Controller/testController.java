@@ -5,16 +5,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/TEST")
-public class TestController {
+@RequestMapping("/teste")
+public class testController {
     @GetMapping
-    public String helloword (){
-        return "hello-word";
+    public String HelloWord (){
+        return "Hello Word";
     }
 
-    @GetMapping("/tokenTest")
-    public String tokenOK (){
-        return "token OK";
+    @GetMapping("/token")
+    public String testeToken (){
+        return "Hello token";
     }
 
 }
