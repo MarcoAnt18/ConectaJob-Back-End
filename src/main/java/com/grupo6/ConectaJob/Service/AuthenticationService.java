@@ -30,10 +30,6 @@ public class AuthenticationService {
 
     @PostMapping()
     public ResponseEntity loginTrabalhador (@RequestBody loginTrabalhadorDTO loginTrabalhadorDTO){
-        System.out.println("LOGIIIIN");
-
-        System.out.println(loginTrabalhadorDTO.cpf());
-        System.out.println(loginTrabalhadorDTO.senha());
 
         var userModeloIdeal = new UsernamePasswordAuthenticationToken(loginTrabalhadorDTO.cpf(), loginTrabalhadorDTO.senha());
         var loginReference = authenticationManager.authenticate(userModeloIdeal);
