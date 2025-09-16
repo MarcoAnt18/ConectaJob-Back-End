@@ -6,8 +6,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-@Getter
-@Setter
+
 public class intervaloTempoSalvosubCategorias {
 
     private List<intervaloTempo> jornadaCdescanco  = new ArrayList<>();
@@ -22,4 +21,20 @@ public class intervaloTempoSalvosubCategorias {
         return jornadaSubCategorizada;
     }
     public intervaloTempoSalvosubCategorias() {}
+
+    public List<intervaloTempo> getJornadaCdescanco() {
+        return jornadaCdescanco;
+    }
+
+    public void setJornadaCdescanco(List<intervaloTempo> jornadaCdescanco) {
+        this.jornadaCdescanco = jornadaCdescanco;
+    }
+
+    public List<intervaloComString> getJornadaSubCategorizada() {
+        return jornadaSubCategorizada;
+    }
+
+    public void setJornadaSubCategorizada(List<intervaloComString> jornadaSubCategorizada) {
+        this.jornadaSubCategorizada = jornadaSubCategorizada;
+    }
 }

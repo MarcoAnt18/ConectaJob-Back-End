@@ -12,13 +12,14 @@ import com.grupo6.ConectaJob.Model.vaga.vagaTrabalho;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmpresaService {
     @Autowired
     private UserGenericRepository UserGenericRepository;
     @Autowired
     private EmpresaRepository empresaRepository;
-
     @Autowired
     private vagaRepository vagaRepository;
     public boolean createEmpresa (createEmpresaDTO crateEmpresaDTO){
@@ -64,6 +65,10 @@ public class EmpresaService {
         return new retornoEmpresaExiste(empresaRequerida.getCNPJ(),
                 empresaRequerida.getNomeEmpresa(), empresaRequerida.getSegmento(),
                 empresaRequerida.getFtPerfilLink(),empresaRequerida.getServicoPrestado());
+    }
+
+    public List<vagaTrabalho> buscaVaga (){
+        return vagaRepository.findAll();
     }
 
 }

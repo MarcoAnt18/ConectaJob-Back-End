@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 
 public class cargo {
 
@@ -13,4 +11,20 @@ public class cargo {
     private String visaoCargo;
 
     public cargo() {}
+
+    public String getNomeCargo() {
+        return nomeCargo;
+    }
+
+    public void setNomeCargo(String nomeCargo) {
+        this.nomeCargo = nomeCargo;
+    }
+
+    public String getVisaoCargo() {
+        return visaoCargo;
+    }
+
+    public void setVisaoCargo(String visaoCargo) {
+        this.visaoCargo = visaoCargo;
+    }
 }
