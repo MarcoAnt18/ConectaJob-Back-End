@@ -28,4 +28,12 @@ public class servicoPrestado {
     public void setDescricaoDoServico(String descricaoDoServico) {
         this.descricaoDoServico = descricaoDoServico;
     }
+
+    @Override
+    public String toString() {
+        return "servicoPrestado{" +
+                "nomeServico='" + nomeServico + '\'' +
+                ", descricaoDoServico='" + descricaoDoServico + '\'' +
+                '}';
+    }
 }

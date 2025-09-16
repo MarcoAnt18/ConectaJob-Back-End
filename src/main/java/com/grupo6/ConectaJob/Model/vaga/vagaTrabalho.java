@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Builder
 public class vagaTrabalho {
+
     @Id
     private String vagaId;
     private String empresaReponsavelId;

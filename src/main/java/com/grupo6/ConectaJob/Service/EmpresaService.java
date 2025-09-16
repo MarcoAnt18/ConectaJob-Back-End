@@ -3,6 +3,7 @@ package com.grupo6.ConectaJob.Service;
 import com.grupo6.ConectaJob.ExceptionsConfig.ExceptionsPerson.notFound;
 import com.grupo6.ConectaJob.Model.DTO.createEmpresaDTO;
 import com.grupo6.ConectaJob.Model.DTO.criarVagaDTO;
+import com.grupo6.ConectaJob.Model.DTO.retornoEmpresaExiste;
 import com.grupo6.ConectaJob.Model.userEmpresa.EmpresaRepository;
 import com.grupo6.ConectaJob.Model.userEmpresa.empresa;
 import com.grupo6.ConectaJob.Model.userGeneric.UserGenericRepository;
@@ -48,6 +49,21 @@ public class EmpresaService {
         vagaRepository.save(vaga);
 
         return true;
+    }
+
+    public retornoEmpresaExiste buscaEmpresa (String cnpj){
+
+        var empresaRequerida = empresaRepository.findEmpresaByCNPJ(cnpj);
+
+        if (empresaRequerida == null){
+            throw new notFound("Não existe empresa com CNPJ neste site !");
+        }
+
+        System.out.println(empresaRequerida);
+
+        return new retornoEmpresaExiste(empresaRequerida.getCNPJ(),
+                empresaRequerida.getNomeEmpresa(), empresaRequerida.getSegmento(),
+                empresaRequerida.getFtPerfilLink(),empresaRequerida.getServicoPrestado());
     }
 
 }

@@ -7,4 +7,7 @@ public interface EmpresaRepository extends MongoRepository <empresa,String> {
 
     @Query("{ '_id': ?0 }")
     empresa findEmpresaByID(String id);
+
+    @Query("{'CNPJ': ?0}")
+    empresa findEmpresaByCNPJ(String CNPJ);
 }
