@@ -24,7 +24,7 @@ public class FiltroConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(HttpMethod.GET, "/teste").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/login","login/funcionarioLogin","login/createFuncionarioUser").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/login","login/funcionarioLogin","login/createUser").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated()
                 )

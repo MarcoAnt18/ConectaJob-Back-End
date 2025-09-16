@@ -1,9 +1,9 @@
-package com.grupo6.ConectaJob.Model.usuario;
+package com.grupo6.ConectaJob.Model.userGeneric;
 
-import com.grupo6.ConectaJob.Model.avaliacao;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -19,21 +18,20 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class userTrabalhador implements UserDetails {
+public class userGeneric implements UserDetails {
 
+    @Id
     private String id;
 
-    private  String cpf;
+    private String cpf;
 
-    private  String nome;
+    private String nome;
 
-    private  String senha;
+    private String senha;
 
     private LocalDate dtNascimento;
 
-    private String ftPerfilLink;
-
-    private HashMap<String,List<avaliacao>> avaliacoesDesempenho;
+    private List<String> ftPerfilLink;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
