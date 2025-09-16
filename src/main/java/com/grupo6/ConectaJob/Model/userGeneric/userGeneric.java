@@ -31,7 +31,9 @@ public class userGeneric implements UserDetails {
 
     private LocalDate dtNascimento;
 
-    private List<String> ftPerfilLink;
+    private String ftPerfilLink;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
