@@ -1,6 +1,7 @@
 package com.grupo6.ConectaJob.ExceptionsConfig;
 
 
+import com.grupo6.ConectaJob.ExceptionsConfig.ExceptionsPerson.DuplicateEntityException;
 import com.grupo6.ConectaJob.ExceptionsConfig.ExceptionsPerson.notFound;
 import com.grupo6.ConectaJob.Model.DTO.returnErrorDTO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,6 +31,11 @@ public class globalExceptionsHandler {
 
     @ExceptionHandler(notFound.class)
     public ResponseEntity<returnErrorDTO> handleReqBasicosCadastroNCompridos(notFound ex, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new returnErrorDTO(ex.getMessage()));
+    }
+
+    @ExceptionHandler(DuplicateEntityException.class)
+    public ResponseEntity<returnErrorDTO> handleReqBasicosCadastroNCompridos(DuplicateEntityException ex, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new returnErrorDTO(ex.getMessage()));
     }
 }

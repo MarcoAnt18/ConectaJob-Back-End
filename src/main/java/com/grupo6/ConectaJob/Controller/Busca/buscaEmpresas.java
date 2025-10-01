@@ -1,7 +1,9 @@
 package com.grupo6.ConectaJob.Controller.Busca;
 
 import com.grupo6.ConectaJob.Model.DTO.retornoEmpresaExiste;
+import com.grupo6.ConectaJob.Model.DTO.retornoVagaExistente;
 import com.grupo6.ConectaJob.Model.DTO.searchDTO;
+import com.grupo6.ConectaJob.Model.DTO.searchVaga;
 import com.grupo6.ConectaJob.Model.vaga.vagaTrabalho;
 import com.grupo6.ConectaJob.Service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,13 @@ public class buscaEmpresas {
         return ResponseEntity.ok(empresaService.buscaEmpresa(searchCNPJ.cnpj()));
     }
 
-    @GetMapping("/Vagas")
+    @GetMapping("/Vaga")
+    public ResponseEntity<retornoVagaExistente> ProcurarVagaIndividual(@RequestBody searchVaga searchVaga){
+        return ResponseEntity.ok(empresaService.BuscarVagaPorNome(searchVaga));
+    }
+
+    @GetMapping("/VagasTodas")
     public ResponseEntity<List<vagaTrabalho>> ProcurarVagasExistentes (){
-        return ResponseEntity.ok(empresaService.buscaVaga());
+        return ResponseEntity.ok(empresaService.buscaTodasVagas());
     }
 }

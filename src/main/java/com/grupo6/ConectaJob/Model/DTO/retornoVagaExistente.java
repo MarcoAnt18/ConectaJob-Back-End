@@ -5,7 +5,7 @@ import com.grupo6.ConectaJob.Model.TempoSubdivicoes.intervaloTempoSalvosubCatego
 import com.grupo6.ConectaJob.Model.cargo.cargo;
 import com.grupo6.ConectaJob.Model.userEmpresa.servicoPrestado;
 
-public record criarVagaDTO(String empresaReponsavelCNPJ,
-servicoPrestado servicoPrestadoNaOcasiao, cargo cargo, intervaloTempo jornadaAmpla,
-intervaloTempoSalvosubCategorias jornandaDetalhada, int numeroVagas){
+public record retornoVagaExistente(String empresaReponsavelCNPJ, servicoPrestado servicoPrestadoNaOcasiao,
+                                   cargo cargo, intervaloTempo jornadaAmpla, intervaloTempoSalvosubCategorias jornandaDetalhada,
+                                   int numeroVagas) {
 }

@@ -15,18 +15,18 @@ public class vagaTrabalho {
 
     @Id
     private String vagaId;
-    private String empresaReponsavelId;
+    private String empresaReponsavelCNPJ;
     private servicoPrestado servicoPrestadoNaOcasiao;
     private cargo cargo;
     private intervaloTempo jornadaAmpla;
     private intervaloTempoSalvosubCategorias jornandaDetalhada;
     private int numeroDeVagasAbertas;
 
-    public vagaTrabalho(String empresaReponsavelId, servicoPrestado servicoPrestadoNaOcasiao,
+    public vagaTrabalho(String empresaReponsavelCNPJ, servicoPrestado servicoPrestadoNaOcasiao,
         cargo cargoIndividuo, intervaloTempo jornadaAmpla, intervaloTempoSalvosubCategorias jornandaDetalhada,
         int numeroDeVagasAbertas) {
 
-        this.empresaReponsavelId = empresaReponsavelId;
+        this.empresaReponsavelCNPJ = empresaReponsavelCNPJ;
         this.servicoPrestadoNaOcasiao = servicoPrestadoNaOcasiao;
         this.cargo = cargoIndividuo;
         this.jornadaAmpla = jornadaAmpla;
@@ -45,12 +45,12 @@ public class vagaTrabalho {
         this.vagaId = vagaId;
     }
 
-    public String getEmpresaReponsavelId() {
-        return empresaReponsavelId;
+    public String getEmpresaReponsavelCNPJ() {
+        return empresaReponsavelCNPJ;
     }
 
-    public void setEmpresaReponsavelId(String empresaReponsavelId) {
-        this.empresaReponsavelId = empresaReponsavelId;
+    public void setEmpresaReponsavelCNPJ(String empresaReponsavelCNPJ) {
+        this.empresaReponsavelCNPJ = empresaReponsavelCNPJ;
     }
 
     public servicoPrestado getServicoPrestadoNaOcasiao() {
