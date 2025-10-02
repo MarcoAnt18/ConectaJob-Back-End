@@ -26,7 +26,7 @@ public class EmpresaService {
         var representante = UserGenericRepository.findByCpf(crateEmpresaDTO.CPFatrelado());
 
         if (representante == null){
-            throw new notFound("Usuario com este CPF no site não encontado");
+            throw new notFound("Usuario com este CPF no site não encontrado");
         }
 
         var novaEmpresa = new empresa(crateEmpresaDTO.CPFatrelado(), crateEmpresaDTO.CNPJ(),
@@ -51,11 +51,57 @@ public class EmpresaService {
                 empresaRequerida.getFtPerfilLink(),empresaRequerida.getServicoPrestado());
     }
 
+    public boolean editarEmpresa(searchDTO searchCNPJ, createEmpresaDTO novaEmpresa){
+        System.out.println("CNPJ: " + searchCNPJ.cnpj() +
+                            "Empresa: " + novaEmpresa.nomeEmpresa());
+
+        var empresaAntiga = empresaRepository.findEmpresaByCNPJ(searchCNPJ.cnpj());
+
+        if (empresaAntiga == null){
+            throw new notFound("Empresa com este CNPJ no site não encontrado");
+        }
+
+        var EmpresaEditada = new empresa(
+                (novaEmpresa.CPFatrelado() == null) ? empresaAntiga.getCPFatrelado() : novaEmpresa.CPFatrelado(),
+                (novaEmpresa.CNPJ() == null) ? empresaAntiga.getCNPJ() : novaEmpresa.CNPJ(),
+                (novaEmpresa.nomeEmpresa() == null) ? empresaAntiga.getNomeEmpresa() : novaEmpresa.nomeEmpresa(),
+                (novaEmpresa.segmento() == null) ? empresaAntiga.getSegmento() : novaEmpresa.segmento(),
+                (novaEmpresa.servicoPrestadoList() == null) ? empresaAntiga.getServicoPrestado() : novaEmpresa.servicoPrestadoList()
+            );
+
+        EmpresaEditada.setId(empresaAntiga.getId());
+
+        empresaRepository.save(EmpresaEditada);
+
+        return true;
+    }
+
+    public boolean deletarEmpresa(searchDTO searchCNPJ){
+        var empresa = empresaRepository.findEmpresaByCNPJ(searchCNPJ.cnpj());
+
+        if (empresa == null){
+            throw new notFound("Empresa com este CNPJ no site não encontrado");
+        }
+
+        //Deleta Vagas da empresa
+        List<vagaTrabalho> vagas = vagaRepository.findAll();
+        for(vagaTrabalho vaga : vagas){
+            if(Objects.equals(vaga.getEmpresaReponsavelCNPJ(), searchCNPJ.cnpj())) {
+                vagaRepository.delete(vaga);
+            }
+        }
+
+        //Deleta empresa
+        empresaRepository.delete(empresa);
+
+        return true;
+    }
+
     public boolean createVaga (criarVagaDTO criarVagaDTO){
         var empresaResponvalel = empresaRepository.findEmpresaByCNPJ(criarVagaDTO.empresaReponsavelCNPJ());
 
         if (empresaResponvalel == null){
-            throw new notFound("Empresa com este CNPJ no site não encontado");
+            throw new notFound("Empresa com este CNPJ no site não encontrado");
         }
 
         //Verifica se a vaga já foi cadastrada na empresa
@@ -79,7 +125,7 @@ public class EmpresaService {
         var empresaResponsavel = empresaRepository.findEmpresaByCNPJ(searchVaga.empresaResponsavelCNPJ());
 
         if (empresaResponsavel == null){
-            throw new notFound("Empresa com este CNPJ no site não encontado");
+            throw new notFound("Empresa com este CNPJ no site não encontrado");
         }
 
         vagaTrabalho VagaEncontrada = buscarVagaTrabalho(searchVaga.nomeVaga(), searchVaga.empresaResponsavelCNPJ());
@@ -114,7 +160,7 @@ public class EmpresaService {
         var empresaResponsavel = empresaRepository.findEmpresaByCNPJ(CNPJ);
 
         if (empresaResponsavel == null){
-            throw new notFound("Empresa com este CNPJ no site não encontado");
+            throw new notFound("Empresa com este CNPJ no site não encontrado");
         }
 
         vagaTrabalho VagaEncontrada = buscarVagaTrabalho(nomeVaga, CNPJ);
@@ -132,7 +178,7 @@ public class EmpresaService {
         var empresaResponsavel = empresaRepository.findEmpresaByCNPJ(searchVaga.empresaResponsavelCNPJ());
 
         if (empresaResponsavel == null){
-            throw new notFound("Empresa com este CNPJ no site não encontado");
+            throw new notFound("Empresa com este CNPJ no site não encontrado");
         }
 
         vagaTrabalho VagaAntiga = buscarVagaTrabalho(searchVaga.nomeVaga(), searchVaga.empresaResponsavelCNPJ());

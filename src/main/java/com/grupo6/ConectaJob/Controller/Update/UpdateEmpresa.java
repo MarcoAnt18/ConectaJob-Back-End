@@ -1,7 +1,6 @@
 package com.grupo6.ConectaJob.Controller.Update;
 
-import com.grupo6.ConectaJob.Model.DTO.editVagaDTO;
-import com.grupo6.ConectaJob.Model.DTO.novaVagaDTO;
+import com.grupo6.ConectaJob.Model.DTO.*;
 import com.grupo6.ConectaJob.Service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,6 +14,12 @@ public class UpdateEmpresa {
 
     @Autowired
     private EmpresaService empresaService;
+
+    @PutMapping("/Empresa")
+    public boolean editarEmpresa(@RequestBody editEmpresaDTO editEmpresaDTO){
+        empresaService.editarEmpresa(editEmpresaDTO.searchCNPJ(), editEmpresaDTO.novaEmpresa());
+        return true;
+    }
 
     @PutMapping("/Vaga")
     public boolean editarVaga(@RequestBody editVagaDTO editVagaDTO){
