@@ -1,28 +1,39 @@
-package com.grupo6.ConectaJob.Model.usuario;
+package com.grupo6.ConectaJob.Model.userGeneric;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
 
-@Table
-@Entity(name = "userTrabalhador")
+@Document(collection = "user_trabalhador")
 @NoArgsConstructor
-public class userTrabalhador implements UserDetails {
+@AllArgsConstructor
+@Builder
+public class userGeneric implements UserDetails {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    private  String cpf;
+    private String cpf;
 
-    private  String nome;
+    private String nome;
 
-    private  String senha;
+    private String senha;
+
+    private LocalDate dtNascimento;
+
+    private String ftPerfilLink;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -59,7 +70,7 @@ public class userTrabalhador implements UserDetails {
         return true;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -75,7 +86,7 @@ public class userTrabalhador implements UserDetails {
         return senha;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

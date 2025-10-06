@@ -1,15 +1,16 @@
 package com.grupo6.ConectaJob.Service;
 
 import com.grupo6.ConectaJob.ConfgSeguranca.tokenConfig;
-import com.grupo6.ConectaJob.Model.DTO.TokenDTO;
+import com.grupo6.ConectaJob.Model.DTO.tokenDTO;
 import com.grupo6.ConectaJob.Model.DTO.createTrabalhadorUserDTO;
 import com.grupo6.ConectaJob.Model.DTO.loginTrabalhadorDTO;
-import com.grupo6.ConectaJob.Model.usuario.repositoryUserTrabalhador;
+import com.grupo6.ConectaJob.Model.userGeneric.UserGenericRepository;
+import com.grupo6.ConectaJob.Model.userTrabalhador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import com.grupo6.ConectaJob.Model.usuario.userTrabalhador;
+import com.grupo6.ConectaJob.Model.userGeneric.userGeneric;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,20 +27,16 @@ public class AuthenticationService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private repositoryUserTrabalhador repositoryUserTrabalhador;
+    private UserGenericRepository UserGenericRepository;
 
     @PostMapping()
     public ResponseEntity loginTrabalhador (@RequestBody loginTrabalhadorDTO loginTrabalhadorDTO){
-        System.out.println("LOGIIIIN");
-
-        System.out.println(loginTrabalhadorDTO.cpf());
-        System.out.println(loginTrabalhadorDTO.senha());
 
         var userModeloIdeal = new UsernamePasswordAuthenticationToken(loginTrabalhadorDTO.cpf(), loginTrabalhadorDTO.senha());
         var loginReference = authenticationManager.authenticate(userModeloIdeal);
-        return ResponseEntity.ok(new TokenDTO(tokenConfig.TokenGenerate((userTrabalhador) loginReference.getPrincipal())));
+        return ResponseEntity.ok(new tokenDTO(tokenConfig.TokenGenerate((userGeneric) loginReference.getPrincipal())));
     }
-    @PostMapping("/createFuncionarioUser")
+    @PostMapping("/createUser")
     public void createTrabalhadorUer(@RequestBody createTrabalhadorUserDTO createTrabalhadorUserDTO) {
 
         var newTrabalhador = new userTrabalhador();
@@ -47,6 +44,8 @@ public class AuthenticationService {
         newTrabalhador.setCpf(createTrabalhadorUserDTO.cpf());
         newTrabalhador.setSenha(passwordEncoder.encode(createTrabalhadorUserDTO.senha()));
 
-        repositoryUserTrabalhador.save(newTrabalhador);
+        UserGenericRepository.save(newTrabalhador);
     }
+
+
 }

@@ -1,5 +1,4 @@
 package com.grupo6.ConectaJob.Model.DTO;
 
-public record TokenDTO (String token){
-
+public record searchDTO(String cnpj) {
 }

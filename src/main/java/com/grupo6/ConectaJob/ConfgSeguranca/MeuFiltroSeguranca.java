@@ -1,6 +1,6 @@
 package com.grupo6.ConectaJob.ConfgSeguranca;
 
-import com.grupo6.ConectaJob.Model.usuario.repositoryUserTrabalhador;
+import com.grupo6.ConectaJob.Model.userGeneric.UserGenericRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ public class MeuFiltroSeguranca extends OncePerRequestFilter {
     @Autowired
     private tokenConfig tokenConfig;
     @Autowired
-    private repositoryUserTrabalhador repositoryUserTrabalhador;
+    private UserGenericRepository UserGenericRepository;
 
 
     @Override
@@ -27,7 +27,7 @@ public class MeuFiltroSeguranca extends OncePerRequestFilter {
         var tokenRecuperado = recuperandoToken(request);
         if (tokenRecuperado != null){
             var tokenValidado = tokenConfig.verificaValidadeToken(tokenRecuperado);
-            var userTrabalhador = repositoryUserTrabalhador.findByCpf(tokenValidado);
+            var userTrabalhador = UserGenericRepository.findByCpf(tokenValidado);
             var authentication = new UsernamePasswordAuthenticationToken(userTrabalhador,null,userTrabalhador.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
